@@ -33,7 +33,7 @@ const CarousalCard = ({ project, onHoverStart, onHoverEnd }: CarousalCardProps) 
     gsap.to(CardRef.current, {
       height: cardHeight,
       width: cardWidth,
-      duration: .8,
+      duration: .2,
       ease: 'power2.out'
     })
 
@@ -42,10 +42,10 @@ const CarousalCard = ({ project, onHoverStart, onHoverEnd }: CarousalCardProps) 
 
   }
   return (
-    <div ref={CardRef} className={`h-${cardHeight} w-${cardWidth} overflow-hidden flex-shrink: 1 cursor-pointer relative `} onMouseEnter={HandleMosueEnter} onMouseLeave={HandleMosueLeave}>
+    <div ref={CardRef} className={` shrink-0 cursor-pointer relative `} style={{ width: cardWidth, height: cardHeight }} onMouseEnter={HandleMosueEnter} onMouseLeave={HandleMosueLeave}>
       {/* Title div  */}
 
-      <div className="absolute left-0 pointer-events-none flex bottom-[calc(100%+3rem)]  flex-col gap=[1rem]">
+      <div className="absolute  pointer-events-none flex bottom-[calc(100%+3rem)]  felx-col gap-4 ">
         <TextReveal splitBy="chars" trigger="manual" ref={NumberRef}>
           <h3 className="text-[1rem] text-[#010101] font-bold">{project.number}</h3>
         </TextReveal>

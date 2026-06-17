@@ -23,3 +23,8 @@ export interface CarousalCardProps{
   onHoverStart:()=>void
   onHoverEnd:()=>void
 }
+export interface TweenRefHandler {
+  pause: () => void;
+  play: () => void;
+  kill:()=> void
+}
