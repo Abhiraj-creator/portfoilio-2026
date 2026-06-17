@@ -2,7 +2,7 @@
 
 import {useLenis} from '../hooks/useLenis'
 import {SmoothScrollerProps} from '@/types/lenis.types'
-const SmoothScroller = ({children,options}:SmoothScrollerProps) => {
+const SmoothScroller = ({children}:SmoothScrollerProps) => {
 
     useLenis()
   return (

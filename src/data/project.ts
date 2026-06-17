@@ -1,4 +1,5 @@
-export const projects = [
+import { Project } from "@/types/CarousalCard.types";
+export const project = [
   {
     id: 1,
     slug: "archive-ff24",

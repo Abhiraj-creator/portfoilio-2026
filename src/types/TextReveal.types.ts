@@ -15,7 +15,7 @@ export interface TextRevealProps {
     SCrollStart?: string,
     duration?: string,
     stagger?:string|number
-    splitBy: keyof SplitByOptions,
+    splitBy?: keyof SplitByOptions,
     delay?: string,
     ease?: string,
 }
