@@ -1,3 +1,4 @@
+'use client'
 import { gsap, SplitText, useGSAP } from '@/libs/gsap'
 import React, { useRef } from 'react'
 import { TextRollProps } from '@/types/TextRoll.types'
@@ -7,59 +8,101 @@ const TextRoll = ({
     splitBy = 'chars'
 }: TextRollProps) => {
     const WrapperRef = useRef<HTMLDivElement>(null)
-    const SplitRef = useRef<SplitText | null>(null)
+    const SplitOriginalRef = useRef<SplitText | null>(null)
+    const SplitCloneRef = useRef<SplitText | null>(null)
 
     useGSAP(() => {
         if (!WrapperRef.current) return
 
-        SplitRef.current = new SplitText(WrapperRef.current, {
-            type: splitBy,
-            lineThreshold: 0.3
-        })
+        const originalEl = WrapperRef.current.querySelector('.text-roll-original')
+        const cloneEl = WrapperRef.current.querySelector('.text-roll-clone')
+
+        if (originalEl) {
+            SplitOriginalRef.current = new SplitText(originalEl, {
+                type: splitBy,
+                lineThreshold: 0.3
+            })
+        }
+
+        if (cloneEl) {
+            SplitCloneRef.current = new SplitText(cloneEl, {
+                type: splitBy,
+                lineThreshold: 0.3
+            })
+        }
+
+        // Set initial positions
+        if (SplitOriginalRef.current) {
+            const origElements = SplitOriginalRef.current[splitBy as 'chars' | 'words' | 'lines']
+            if (origElements) gsap.set(origElements, { yPercent: 0 })
+        }
+        if (SplitCloneRef.current) {
+            const cloneElements = SplitCloneRef.current[splitBy as 'chars' | 'words' | 'lines']
+            if (cloneElements) gsap.set(cloneElements, { yPercent: 100 })
+        }
 
         return () => {
-            if (SplitRef.current) {
-                SplitRef.current.revert()
-            }
+            if (SplitOriginalRef.current) SplitOriginalRef.current.revert()
+            if (SplitCloneRef.current) SplitCloneRef.current.revert()
         }
     }, { scope: WrapperRef, dependencies: [splitBy] })
 
     const { contextSafe } = useGSAP({ scope: WrapperRef })
 
     const MouseEnterHandler = contextSafe(() => {
-        if (!SplitRef.current) return
-        const elements = SplitRef.current[splitBy as 'chars' | 'words' | 'lines']
-        if (!elements) return
+        if (!SplitOriginalRef.current || !SplitCloneRef.current) return
+        const origElements = SplitOriginalRef.current[splitBy as 'chars' | 'words' | 'lines']
+        const cloneElements = SplitCloneRef.current[splitBy as 'chars' | 'words' | 'lines']
+        if (!origElements || !cloneElements) return
 
-        gsap.killTweensOf(elements)
-        gsap.set(elements, { y: '110%', opacity: 0 })
-        gsap.to(elements, {
-            y: '0%',
-            opacity: 1,
-            duration: 0.5,
-            stagger: 0.02,
-            ease: 'power3.out'
+        gsap.killTweensOf(origElements)
+        gsap.killTweensOf(cloneElements)
+        
+        gsap.to(origElements, {
+            yPercent: -100,
+            duration: 0.4,
+            stagger: 0.015,
+            ease: 'power2.out'
+        })
+        gsap.to(cloneElements, {
+            yPercent: 0,
+            duration: 0.4,
+            stagger: 0.015,
+            ease: 'power2.out'
         })
     })
 
     const MouseLeaveHandler = contextSafe(() => {
-        if (!SplitRef.current) return
-        const elements = SplitRef.current[splitBy as 'chars' | 'words' | 'lines']
-        if (!elements) return
+        if (!SplitOriginalRef.current || !SplitCloneRef.current) return
+        const origElements = SplitOriginalRef.current[splitBy as 'chars' | 'words' | 'lines']
+        const cloneElements = SplitCloneRef.current[splitBy as 'chars' | 'words' | 'lines']
+        if (!origElements || !cloneElements) return
 
-        gsap.killTweensOf(elements)
-        gsap.to(elements, {
-            y: '0%',
-            opacity: 1,
-            duration: 0.5,
-            stagger: 0.02,
-            ease: 'power3.out'
+        gsap.killTweensOf(origElements)
+        gsap.killTweensOf(cloneElements)
+
+        gsap.to(origElements, {
+            yPercent: 0,
+            duration: 0.4,
+            stagger: -0.01,
+            ease: 'power2.out'
+        })
+        gsap.to(cloneElements, {
+            yPercent: 100,
+            duration: 0.4,
+            stagger: -0.01,
+            ease: 'power2.out'
         })
     })
 
     return (
-        <div ref={WrapperRef} className='overflow-hidden' onMouseEnter={MouseEnterHandler} onMouseLeave={MouseLeaveHandler}>
-            {children}
+        <div ref={WrapperRef} className='overflow-hidden relative inline-block' onMouseEnter={MouseEnterHandler} onMouseLeave={MouseLeaveHandler}>
+            <div className="text-roll-original">
+                {children}
+            </div>
+            <div className="text-roll-clone absolute top-0 left-0 w-full h-full pointer-events-none">
+                {children}
+            </div>
         </div>
     )
 }

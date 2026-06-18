@@ -14,15 +14,21 @@ const Navbar = () => {
                 </TextRoll>
             </div>
             <div className="right flex items-center gap-7 text-sm font-semibold ">
-                <TextReveal delay=".2" stagger=".1">
+                <TextRoll>
+                    <TextReveal delay=".2" stagger=".1">
                     <Link href="/" >home</Link>
                 </TextReveal>
-                <TextReveal delay=".4" stagger=".1">
+                </TextRoll>
+               <TextRoll>
+                 <TextReveal delay=".4" stagger=".1">
                     <Link href="/contact" >contact</Link>
                 </TextReveal>
+               </TextRoll>
+               <TextRoll>
                 <TextReveal delay=".6" stagger=".1">
                     <Link href="/project" >project</Link>
                 </TextReveal>
+               </TextRoll>
             </div>
         </div>
     )
