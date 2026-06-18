@@ -1,1 +1,7 @@
 @import "tailwindcss";
+
+@theme {
+  /* This maps your custom font utilities to the CSS variables */
+  --font-bebas: var(--font-bebas), sans-serif;
+  --font-jetbrains: var(--font-jetbrains), monospace;
+}

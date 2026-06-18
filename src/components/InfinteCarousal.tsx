@@ -7,31 +7,31 @@ import { gsap } from '@/libs/gsap'
 
 const InfinteCarousal = () => {
 
-    const TrackRef =useRef(null)
-    const TweenRef= useRef<TweenRefHandler>(null)
+    const TrackRef = useRef(null)
+    const TweenRef = useRef<TweenRefHandler>(null)
 
-    useEffect(()=>{
-        const SingleRound=project.length*(cardWidth+cardGap)
+    useEffect(() => {
+        const SingleRound = project.length * (cardWidth + cardGap)
 
-        TweenRef.current=gsap.to(TrackRef.current,{
-            x:-SingleRound,
+        TweenRef.current = gsap.to(TrackRef.current, {
+            x: -SingleRound,
             repeat: -1,
-            ease:'none',
-            duration:10,
+            ease: 'none',
+            duration: 15,
         })
 
-        return ()=>{
+        return () => {
             TweenRef.current?.kill()
         }
-    },[project])
+    }, [project])
 
     const Doubled = [...project, ...project]
 
     return (
-        <div className={` overflow-hidden   `} style={{padding:`${carousalHeight*.2}px 0 24px`}}>
-            <div className={`flex items-center shrink-0`}  ref={TrackRef} style={{width:'max-content', gap: `${cardGap}px`, height: `${carousalHeight}px`}}>
-                {Doubled.map((item, index)=>{
-                    return <CarousalCard key={`${item.id}-${index}`}  project={item} onHoverStart={() => { TweenRef.current?.pause()}} onHoverEnd={() => { TweenRef.current?.play()}} />
+        <div className={` overflow-hidden`} style={{ padding: `${carousalHeight * .4}px 0 24px` }}>
+            <div className={`flex items-center w-max`} ref={TrackRef} style={{ gap: `${cardGap}px`, height: `${carousalHeight}px` ,flexShrink:0}}>
+                {Doubled.map((item, index) => {
+                    return <CarousalCard key={`${item.id}-${index}`} project={item} onHoverStart={() => { TweenRef.current?.pause() }} onHoverEnd={() => { TweenRef.current?.play() }} />
                 })}
             </div>
 

@@ -7,7 +7,7 @@ import React,{ useRef } from 'react'
 const Page = () => {
   return (
    <>
-    <div className='h-screen w-screen   text-5xl flex items-center justify-center '>
+    <div className='h-[200vh] w-screen   text-5xl  '>
        <InfinteCarousal />
     </div>
    </>
