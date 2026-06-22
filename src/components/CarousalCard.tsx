@@ -68,11 +68,11 @@ const CarousalCard = ({ project, onHoverStart, onHoverEnd }: CarousalCardProps) 
 
       <div className="absolute  pointer-events-none flex bottom-[calc(100%+3rem)]  felx-col gap-4 ">
         <TextReveal splitBy="chars" trigger="manual" ref={NumberRef} duration=".25">
-          <h3 className="text-[.9rem] text-[#010101] font-bold font-jetbrains">{project.number}</h3>
+          <h3 className="text-[1rem] tracking-wide  font-medium font-bebas">{project.number}</h3>
         </TextReveal>
 
         <TextReveal splitBy="chars" trigger="manual" ref={TitleRef} duration=".25">
-          <h3 className="text-[.9rem] text-[#010101] font-bold font-jetbrains">{project.title}</h3>
+          <h3 className="text-[1rem] tracking-wide  font-medium font-bebas">{project.title}</h3>
         </TextReveal>
       </div>
 

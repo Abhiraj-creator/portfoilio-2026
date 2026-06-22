@@ -2,7 +2,7 @@ import { gsap } from "@/libs/gsap";
 import { useRouter } from "next/navigation";
 import { useCallback } from "react";
 
-const STRIP_COUNT: number = Math.round(Math.random()*20);
+const STRIP_COUNT: number = Math.round(Math.random()*12);
 
 
 const CreateStrip = () => {

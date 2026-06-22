@@ -1,7 +1,15 @@
 @import "tailwindcss";
 
+
 @theme {
   /* This maps your custom font utilities to the CSS variables */
   --font-bebas: var(--font-bebas), sans-serif;
   --font-jetbrains: var(--font-jetbrains), monospace;
+  --font-mona-sans: var(--font-mona-sans), sans-serif;
+  --font-anton: var(--font-anton), sans-serif;
+}
+
+body{
+  background-color: #E8E2D8;
+  color:#3C3D3C
 }

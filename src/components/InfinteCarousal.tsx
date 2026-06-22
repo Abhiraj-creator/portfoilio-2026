@@ -29,7 +29,7 @@ const InfinteCarousal = () => {
 
     return (
         <div className={` overflow-hidden`} style={{ padding: `${carousalHeight * .4}px 0 24px` }}>
-            <div className={`flex items-center w-max`} ref={TrackRef} style={{ gap: `${cardGap}px`, height: `${carousalHeight}px` ,flexShrink:0}}>
+            <div className={`flex items-center w-max`} ref={TrackRef} style={{ gap: `${cardGap}px`, height: `${carousalHeight}px`, flexShrink: 0 }}>
                 {Doubled.map((item, index) => {
                     return <CarousalCard key={`${item.id}-${index}`} project={item} onHoverStart={() => { TweenRef.current?.pause() }} onHoverEnd={() => { TweenRef.current?.play() }} />
                 })}

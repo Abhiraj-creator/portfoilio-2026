@@ -1,6 +1,6 @@
 
 import type { Metadata } from "next";
-import { Bebas_Neue, JetBrains_Mono } from 'next/font/google';
+import { Bebas_Neue, JetBrains_Mono,Mona_Sans ,Anton} from 'next/font/google';
 import "./globals.css";
 import SmoothScroller from "@/components/SmoothScroller";
 import Navbar from "@/components/Navbar";
@@ -11,7 +11,16 @@ const bebasNeue = Bebas_Neue({
   subsets: ['latin'],
   variable: '--font-bebas',
 });
-
+const anton = Anton({
+  weight: '400',
+  subsets: ['latin'],
+  variable: '--font-anton',
+});
+const monaSans = Mona_Sans({
+  weight: '400',
+  subsets: ['latin'],
+  variable: '--font-mona-sans',
+});
 // Configure JetBrains Mono
 const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
@@ -31,7 +40,7 @@ export default function RootLayout({children}: Readonly<{
   return (
     <html
       lang="en"
-      className={` h-full antialiased ${bebasNeue.variable} ${jetbrainsMono.variable}`}
+      className={` h-full antialiased ${bebasNeue.variable} ${jetbrainsMono.variable} ${monaSans.variable} ${anton.variable}`}
     >
       <body className="min-h-full flex flex-col">
         <Navbar/>

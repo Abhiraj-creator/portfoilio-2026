@@ -1,16 +1,14 @@
 'use client'
+import Heropage from '@/components/Heropage'
 import InfinteCarousal from '@/components/InfinteCarousal'
-import TextReveal from '@/components/TextReveal'
-import { TextRevealHandler } from '@/types/TextReveal.types'
-import React,{ useRef } from 'react'
+import React from 'react'
 
 const Page = () => {
   return (
-   <>
-    <div className='h-[200vh] w-screen   text-5xl  '>
-       <InfinteCarousal />
-    </div>
-   </>
+    <main className="min-h-screen bg-[#EAE6DF]">
+      <Heropage />
+        <InfinteCarousal />
+    </main>
   )
 }
 
