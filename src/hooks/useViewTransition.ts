@@ -1,13 +1,12 @@
 import { gsap } from "@/libs/gsap";
-import { useRouter } from "next/navigation";
-import { useCallback } from "react";
+import { useRouter, usePathname } from "next/navigation";
+import { useCallback, useEffect } from "react";
+import { markPageTransitionStart, PAGE_TRANSITION_TOTAL_MS, PAGE_ENTER_LEAD_MS } from "@/libs/pageTransition";
 
-const STRIP_COUNT: number = Math.round(Math.random()*12);
-
-
-const CreateStrip = () => {
+const CreateStrip = (id: string = 'page-transition-overlay') => {
+    const STRIP_COUNT: number = Math.max(5, Math.round(Math.random()*12));
     const overlay = document.createElement('div')
-    overlay.id = 'page-transition-overlay'
+    overlay.id = id
     overlay.style.cssText = `
         position:fixed;
         inset:0;
@@ -29,28 +28,63 @@ const CreateStrip = () => {
     document.body.appendChild(overlay);
     return overlay;
 }
-const removeOverlay = () => {
-    const el = document.querySelector('#page-transition-overlay')
+
+const removeOverlay = (id: string = 'page-transition-overlay') => {
+    const el = document.getElementById(id)
     if (el) {
         el.remove()
     }
 }
+
+let isInitialLoad = true;
+let isTransitioning = false;
+
 const useViewTransition = () => {
-
-
     const router = useRouter()
+    const pathname = usePathname()
+
+    useEffect(() => {
+        if (isInitialLoad) {
+            isInitialLoad = false;
+            const overlayId = 'page-transition-overlay-initial';
+            const overlay = CreateStrip(overlayId);
+            const strip = Array.from(overlay.children);
+            
+            gsap.set(strip, { scaleY: 1, transformOrigin: 'bottom' });
+
+            gsap.to(strip, {
+                scaleY: 0,
+                duration: 0.65,
+                delay: 0.1,
+                stagger: {
+                    each: 0.05,
+                    from: 'random'
+                },
+                transformOrigin: 'top',
+                ease: 'power3.inOut',
+                onComplete: () => {
+                    removeOverlay(overlayId);
+                }
+            });
+        }
+    }, [pathname]);
 
     const navigateTo = useCallback((href: string) => {
-        const overlay = CreateStrip();
+        if (href === pathname || isTransitioning) return;
 
+        isTransitioning = true;
+        markPageTransitionStart(PAGE_TRANSITION_TOTAL_MS, PAGE_ENTER_LEAD_MS);
+        
+        const overlayId = 'page-transition-overlay-nav';
+        const overlay = CreateStrip(overlayId);
         const strip = Array.from(overlay.children)
 
         gsap.to(strip, {
             scaleY: 1,
-            duration: '.55',
+            duration: 0.55,
             ease: 'power3.inOut',
             stagger: {
-                each: .05,
+                each: 0.05,
                 from: 'random'
             },
             onComplete: () => {
@@ -58,25 +92,24 @@ const useViewTransition = () => {
 
                 gsap.to(strip, {
                     scaleY: 0,
-                    duration: '.65',
-                    delay: '.01',
+                    duration: 0.65,
+                    delay: 0.01,
                     stagger: {
-                        each: .05,
+                        each: 0.05,
                         from: 'random'
                     },
                     transformOrigin: 'top',
                     ease: 'power3.inOut',
                     onComplete: () => {
-                        removeOverlay()
+                        isTransitioning = false
+                        removeOverlay(overlayId)
                     }
                 })
             }
-
         })
-    }, [router])
+    }, [router, pathname])
 
     return { navigateTo };
-
 }
 
 export default useViewTransition

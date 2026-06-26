@@ -1,11 +1,11 @@
 'use client'
 
 import React, { useState, useEffect } from "react"
-import Link from "next/link"
 import TextReveal from "./TextReveal"
 import TextRoll from "./TextRoll"
 import Button from "./Button"
 import { RiMenu5Line } from "@remixicon/react"
+import TransitionLink from "./TransitionLink"
 
 const Navbar = () => {
     const [time, setTime] = useState("")
@@ -36,9 +36,9 @@ const Navbar = () => {
                 <div className="left flex items-center gap-2 relative">
                     <TextRoll>
                         <TextReveal splitBy="words" trigger="mount" stagger=".1">
-                            <Link href="/" className="text-[1.2rem] md:text-[1.5rem] font-black tracking-wider text-[#1C1B1A] hover:opacity-80 transition-opacity">
+                            <TransitionLink href="/" className="text-[1.2rem] md:text-[1.5rem] font-black tracking-wider text-[#1C1B1A] hover:opacity-80 transition-opacity">
                                 Abhiraj singh bhati
-                            </Link>
+                            </TransitionLink>
                         </TextReveal>
                     </TextRoll>
                     
@@ -71,24 +71,24 @@ const Navbar = () => {
                 
                 {/* Center Action Button (Hidden on very small mobile screens) */}
                 <div className="hidden sm:block">
-                    <Button text="Download Resume"/>
+                    <Button text=" Resume"/>
                 </div>
                 
                 {/* Desktop Link Navigation */}
                 <div className="hidden md:flex items-center gap-7 text-[1rem] font-light tracking-widest text-[#1C1B1A]">
                     <TextRoll>
                         <TextReveal delay=".2" stagger=".1">
-                            <Link href="/" className="hover:text-[#A84B2B] transition-colors">home</Link>
+                            <TransitionLink href="/" className="hover:text-[#A84B2B] transition-colors">home</TransitionLink>
                         </TextReveal>
                     </TextRoll>
                     <TextRoll>
                         <TextReveal delay=".4" stagger=".1">
-                            <Link href="/project" className="hover:text-[#A84B2B] transition-colors">project</Link>
+                            <TransitionLink href="/#projects" className="hover:text-[#A84B2B] transition-colors">project</TransitionLink>
                         </TextReveal>
                     </TextRoll>
                     <TextRoll>
                         <TextReveal delay=".6" stagger=".1">
-                            <Link href="/contact" className="hover:text-[#A84B2B] transition-colors">contact</Link>
+                            <TransitionLink href="/contact" className="hover:text-[#A84B2B] transition-colors">contact</TransitionLink>
                         </TextReveal>
                     </TextRoll>
                 </div>
@@ -123,33 +123,33 @@ const Navbar = () => {
 
                 {/* Vertical Navigation Link Stack */}
                 <div className="flex flex-col gap-6 my-auto font-bebas text-5xl tracking-wide">
-                    <Link 
+                    <TransitionLink 
                         href="/" 
                         onClick={() => setMenuOpen(false)}
                         className="text-[#1C1B1A] hover:text-[#A84B2B] transition-all duration-200 hover:translate-x-2 text-left"
                     >
                         Home
-                    </Link>
-                    <Link 
-                        href="/project" 
+                    </TransitionLink>
+                    <TransitionLink 
+                        href="/#projects" 
                         onClick={() => setMenuOpen(false)}
                         className="text-[#1C1B1A] hover:text-[#A84B2B] transition-all duration-200 hover:translate-x-2 text-left"
                     >
                         Projects
-                    </Link>
-                    <Link 
+                    </TransitionLink>
+                    <TransitionLink 
                         href="/contact" 
                         onClick={() => setMenuOpen(false)}
                         className="text-[#1C1B1A] hover:text-[#A84B2B] transition-all duration-200 hover:translate-x-2 text-left"
                     >
                         Contact
-                    </Link>
+                    </TransitionLink>
                 </div>
 
                 {/* Drawer Bottom Actions & Meta */}
                 <div className="flex flex-col gap-6">
                     <div className="w-full" onClick={() => setMenuOpen(false)}>
-                        <Button text="Download Resume" />
+                        <Button text="Resume" />
                     </div>
                     
                     <div className="flex justify-between items-center font-mono text-[9px] tracking-widest text-[#827C75] border-t border-[#1C1B1A]/10 pt-4">

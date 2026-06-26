@@ -3,6 +3,7 @@
 import React, { useRef } from 'react'
 import { gsap, useGSAP } from '@/libs/gsap'
 import Marquee from './Marquee'
+import Image from 'next/image'
 
 const Heropage = () => {
     const containerRef = useRef<HTMLDivElement>(null)
@@ -86,11 +87,11 @@ const Heropage = () => {
         >
             {/* 5 Vertical baseline grid lines */}
             <div className="absolute inset-0 pointer-events-none flex justify-between px-6 md:px-16 z-0">
-                <div className="grid-line w-[1px] h-full bg-[#1C1B1A]/8 origin-top"></div>
-                <div className="grid-line w-[1px] h-full bg-[#1C1B1A]/8 origin-top hidden sm:block"></div>
-                <div className="grid-line w-[1px] h-full bg-[#1C1B1A]/8 origin-top"></div>
-                <div className="grid-line w-[1px] h-full bg-[#1C1B1A]/8 origin-top hidden sm:block"></div>
-                <div className="grid-line w-[1px] h-full bg-[#1C1B1A]/8 origin-top"></div>
+                <div className="grid-line w-px h-full bg-[#1C1B1A]/8 origin-top"></div>
+                <div className="grid-line w-px h-full bg-[#1C1B1A]/8 origin-top hidden sm:block"></div>
+                <div className="grid-line w-px h-full bg-[#1C1B1A]/8 origin-top"></div>
+                <div className="grid-line w-px h-full bg-[#1C1B1A]/8 origin-top hidden sm:block"></div>
+                <div className="grid-line w-px h-full bg-[#1C1B1A]/8 origin-top"></div>
             </div>
 
             {/* CSS Background Drafting Grid */}
@@ -119,7 +120,7 @@ const Heropage = () => {
             </div>
 
             {/* Content wrapper — flush left, positioned from top like reference */}
-            <div className="relative z-10 flex flex-col flex-grow justify-start pt-8 md:pt-10 w-full pl-6 md:pl-16 ">
+            <div className="relative z-10 flex flex-col grow justify-start pt-8 md:pt-10 w-full pl-6 md:pl-16 ">
                 {/* Massive Editorial Headline */}
                 <div className="w-full flex flex-col gap-0 pb-10 md:pb-16 pl-0 md:pl-20">
 
@@ -181,8 +182,8 @@ const Heropage = () => {
                                 fontSize: 'clamp(40px, 12vw, 210px)',
                                 lineHeight: 0.9,
                                 letterSpacing: '0.03em',
-                                color: 'transparent',
-                                WebkitTextStroke: '2px #9D9A92',
+                                    color: 'transparent',
+                                    WebkitTextStroke: '2px #9D9A92',
                                 display: 'block',
                             }}
                         >
@@ -199,7 +200,7 @@ const Heropage = () => {
                     {/* Image Column */}
                     <div className="col-span-1 md:col-span-5 flex justify-center md:justify-start">
                         {/* Shrink-wrapped relative wrapper to ensure stamp is correctly bound to image boundaries */}
-                        <div className="relative w-full max-w-[280px]">
+                        <div className="relative w-full max-w-70">
                             {/* Rotating Decorative Stamp */}
                             <div className="absolute -bottom-8 -left-8 w-32 h-32 md:w-36 md:h-36 z-20 spin-animation select-none pointer-events-none">
                                 <svg viewBox="0 0 100 100" className="w-full h-full opacity-55">
@@ -216,7 +217,7 @@ const Heropage = () => {
                                 </svg>
                             </div>
 
-                            <div className="hero-image-wrap overflow-hidden aspect-[4/5] w-full relative border border-[#1C1B1A]/12 p-2 bg-[#F4F1EB] shadow-[0_8px_30px_rgb(0,0,0,0.02)]">
+                            <div className="hero-image-wrap overflow-hidden aspect-4/5 w-full relative border border-[#1C1B1A]/12 p-2 bg-[#F4F1EB] shadow-[0_8px_30px_rgb(0,0,0,0.02)]">
                                 <div className="overflow-hidden w-full h-full relative bg-[#EAE6DF]">
                                     <img
                                         src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800&auto=format&fit=crop&q=80"
@@ -234,9 +235,9 @@ const Heropage = () => {
                             Hi, my name is Abhiraj, and I am a developer who bridges the gap between design concepts and dynamic code. I build robust digital products that solve actual problems, delivering fluid interactions and immaculately structured code.
                         </p>
                         <p className="desc-fade font-jetbrains text-xs text-[#827C75] tracking-wider uppercase leading-loose border-l border-[#1C1B1A]/20 pl-4">
-                            // Core Focus: React, Next.js, WebGL & Creative Physics
+                            Core Focus: React, Next.js, WebGL & Creative Physics
                             <br />
-                            // Vibe: Editorial, raw plaster base, minimal tech elements
+                             Vibe: Editorial, raw plaster base, minimal tech elements
                         </p>
                     </div>
                 </div>

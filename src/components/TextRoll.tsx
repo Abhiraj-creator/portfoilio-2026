@@ -33,7 +33,8 @@ const TextRoll = ({ duration='.4',children, splitBy = 'chars' }: TextRollProps) 
         }
     }, { scope: WrapperRef, dependencies: [splitBy] })
 
-    const { contextSafe } = useGSAP({ scope: WrapperRef })
+    const { contextSafe } = 
+    useGSAP({ scope: WrapperRef })
 
     const handleHover = contextSafe((entering: boolean) => {
         const origElements = getElements(SplitOriginalRef)
