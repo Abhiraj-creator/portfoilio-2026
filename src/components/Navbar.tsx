@@ -69,9 +69,19 @@ const Navbar = () => {
                     </div>
                 </div>
                 
-                {/* Center Action Button (Hidden on very small mobile screens) */}
+                {/* Desktop Resume download */}
                 <div className="hidden sm:block">
-                    <Button text=" Resume"/>
+                    <TextReveal duration='2.5'>
+                        <TextRoll duration='.3'>
+                            <a
+                                href="/abhiraj's_resume.pdf"
+                                download="Abhiraj_Singh_Bhati_Resume.pdf"
+                                className="px-4 py-1 border border-[#1C1B1A] cursor-pointer font-semibold tracking-wider uppercase font-bebas text-[1rem]  hover:text-[#EAE6DF] transition-colors duration-200"
+                            >
+                                Resume
+                            </a>
+                        </TextRoll>
+                    </TextReveal>
                 </div>
                 
                 {/* Desktop Link Navigation */}
@@ -149,7 +159,17 @@ const Navbar = () => {
                 {/* Drawer Bottom Actions & Meta */}
                 <div className="flex flex-col gap-6">
                     <div className="w-full" onClick={() => setMenuOpen(false)}>
-                        <Button text="Resume" />
+                        <TextReveal duration='2.5'>
+                            <TextRoll duration='.3'>
+                                <a
+                                    href="/abhiraj's_resume.pdf"
+                                    download="Abhiraj_Singh_Bhati_Resume.pdf"
+                                    className="px-4 py-1 border border-[#1C1B1A] cursor-pointer font-semibold tracking-wider uppercase font-bebas text-[1rem] hover:bg-[#1C1B1A] hover:text-[#EAE6DF] transition-colors duration-200"
+                                >
+                                    Resume
+                                </a>
+                            </TextRoll>
+                        </TextReveal>
                     </div>
                     
                     <div className="flex justify-between items-center font-mono text-[9px] tracking-widest text-[#827C75] border-t border-[#1C1B1A]/10 pt-4">

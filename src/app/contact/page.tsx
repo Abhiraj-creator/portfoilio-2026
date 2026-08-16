@@ -40,7 +40,12 @@ export default function Contact() {
               </p>
          
             <TextRoll>
-             <a href="#" className=" px-4 py-1 border-1 cursor-pointer font-semibold  tracking-wider">  Let&apos;s Collaborate</a>
+             <a
+               href="mailto:abhirajbhati676@gmail.com?subject=Let's%20Collaborate"
+               className=" px-4 py-1 border-1 cursor-pointer font-semibold  tracking-wider"
+             >
+               Let&apos;s Collaborate
+             </a>
             </TextRoll>
           
             </div>
@@ -50,7 +55,12 @@ export default function Contact() {
                 If you&apos;re a digital agency or company looking for a designer, developer who cares about details, motion, and meaningful design. I&apos;m always open to exciting opportunities.
               </p>
                 <TextRoll>
-             <a href="#" className=" px-4 py-1 border-1 cursor-pointer font-semibold  tracking-wider"> Hire Me</a>
+             <a
+               href="mailto:abhirajbhati676@gmail.com?subject=Hire%20Me"
+               className=" px-4 py-1 border-1 cursor-pointer font-semibold  tracking-wider"
+             >
+               Hire Me
+             </a>
             </TextRoll>
             </div>
 
@@ -59,15 +69,30 @@ export default function Contact() {
                 You can reach me through any of my socials below or drop me a message. I&apos;d be happy to connect, collaborate, or just chat about new ideas.
               </p>
               <div className="flex flex-wrap gap-3 sm:gap-4">
-                <a href="#" className="relative group inline-flex overflow-hidden transition-colors hover:text-[#A84B2B] text-[1.05rem] sm:text-lg font-anton uppercase tracking-widest">
+                <a
+                  href="https://www.linkedin.com/in/abhiraj-b-8336b332b/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="relative group inline-flex overflow-hidden transition-colors hover:text-[#A84B2B] text-[1.05rem] sm:text-lg font-anton uppercase tracking-widest"
+                >
                   <span className="transition-transform duration-500 group-hover:-translate-y-full">LinkedIn</span>
                   <span className="absolute top-full transition-transform duration-500 group-hover:-translate-y-full">LinkedIn</span>
                 </a>
-                <a href="#" className="relative group inline-flex overflow-hidden transition-colors hover:text-[#A84B2B] text-[1.05rem] sm:text-lg font-anton uppercase tracking-widest">
+                <a
+                  href="https://github.com/Abhiraj-creator"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="relative group inline-flex overflow-hidden transition-colors hover:text-[#A84B2B] text-[1.05rem] sm:text-lg font-anton uppercase tracking-widest"
+                >
                   <span className="transition-transform duration-500 group-hover:-translate-y-full">GitHub</span>
                   <span className="absolute top-full transition-transform duration-500 group-hover:-translate-y-full">GitHub</span>
                 </a>
-                <a href="#" className="relative group inline-flex overflow-hidden transition-colors hover:text-[#A84B2B] text-[1.05rem] sm:text-lg font-anton uppercase tracking-widest">
+                <a
+                  href="https://x.com/AbhXraj"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="relative group inline-flex overflow-hidden transition-colors hover:text-[#A84B2B] text-[1.05rem] sm:text-lg font-anton uppercase tracking-widest"
+                >
                   <span className="transition-transform duration-500 group-hover:-translate-y-full">Twitter / X</span>
                   <span className="absolute top-full transition-transform duration-500 group-hover:-translate-y-full">Twitter / X</span>
                 </a>
