@@ -220,7 +220,7 @@ const Heropage = () => {
                             <div className="hero-image-wrap overflow-hidden aspect-4/5 w-full relative border border-[#1C1B1A]/12 p-2 bg-[#F4F1EB] shadow-[0_8px_30px_rgb(0,0,0,0.02)]">
                                 <div className="overflow-hidden w-full h-full relative bg-[#EAE6DF]">
                                     <img
-                                        src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800&auto=format&fit=crop&q=80"
+                                        src="../../3045bbb3-e4cc-47be-88fa-e15bd3930911.jpg"
                                         alt="Creative Developer Portfolio"
                                         className="hero-image object-cover w-full h-full scale-[1.1] transition-all duration-700 ease-in-out cursor-crosshair"
                                     />

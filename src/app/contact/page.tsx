@@ -23,9 +23,7 @@ export default function Contact() {
 
     return () => ctx.revert();
   }, [enterDelay]);
-  
-const username='ankur'
-console.log(username)
+
 
   return (
     <main className="min-h-[100svh] overflow-hidden bg-[#EAE6DF] text-[#3C3D3C] px-4 sm:px-6 md:px-12 pt-20 sm:pt-24 lg:pt-28 pb-4 sm:pb-6">
