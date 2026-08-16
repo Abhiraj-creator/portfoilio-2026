@@ -164,15 +164,31 @@ const ProjectPage = ({ project, nextProject }: ProjectPageProps) => {
           Next Project
         </h2>
 
-        <TextRoll duration=".4" splitBy="chars">
-          <button
-            type="button"
-            onClick={handleNextClick}
-            className="font-anton text-[clamp(2.5rem,7vw,5rem)] uppercase leading-none tracking-tight transition-colors hover:text-[#A84B2B]"
+        {/*
+          Pure-CSS roll effect — keeps the <button> element fully intact so
+          onClick fires reliably. SplitText inside <TextRoll> would replace the
+          button's text node with split <div>s, silently breaking the click target.
+        */}
+        <button
+          type="button"
+          onClick={handleNextClick}
+          className="group relative overflow-hidden font-anton text-[clamp(2.5rem,7vw,5rem)] uppercase leading-none tracking-tight"
+          aria-label={`Go to next project: ${nextProject.title}`}
+        >
+          {/* visible row */}
+          <span
+            className="block transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:-translate-y-full"
           >
             {nextProject.title}
-          </button>
-        </TextRoll>
+          </span>
+          {/* clone that slides up from below */}
+          <span
+            aria-hidden
+            className="absolute inset-0 flex items-center justify-center translate-y-full text-[#A84B2B] transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:translate-y-0"
+          >
+            {nextProject.title}
+          </span>
+        </button>
       </footer>
     </main>
   );
