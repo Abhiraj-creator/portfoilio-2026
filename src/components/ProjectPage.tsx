@@ -2,9 +2,11 @@
 
 import { useRef } from "react";
 import TextReveal from "./TextReveal";
-import { gsap, useGSAP } from "@/libs/gsap";
+import TextRoll from "./TextRoll";
+import { gsap, ScrollTrigger, useGSAP } from "@/libs/gsap";
 import useViewTransition from "@/hooks/useViewTransition";
 import type { Project } from "@/types/CarousalCard.types";
+import Button from "./Button";
 
 type ProjectPageProps = {
   project: Project;
@@ -14,48 +16,59 @@ type ProjectPageProps = {
 const ProjectPage = ({ project, nextProject }: ProjectPageProps) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const imageRef = useRef<HTMLImageElement | null>(null);
-  const { navigateTo } = useViewTransition();
 
   useGSAP(
     () => {
       if (!containerRef.current || !imageRef.current) return;
 
+      // Hero image clip-path reveal
       gsap.to(imageRef.current, {
         clipPath: "inset(0 0 0% 0)",
         scale: 1,
-        duration: 1.4,
+        duration: 1.6,
         ease: "expo.out",
-        delay: 0.5,
+        delay: 0.7,
       });
 
-      const gallerySections = Array.from(
-        containerRef.current.querySelectorAll<HTMLElement>("[data-gallery-section]"),
+      // Rotation-based scroll entrance + pinning per gallery section
+      const sections = gsap.utils.toArray<HTMLElement>(
+        "[data-scroll-section]",
       );
 
-      gallerySections.forEach((section) => {
-        const frame = section.querySelector<HTMLElement>("[data-gallery-frame]");
+      sections.forEach((section, idx) => {
+        const frame = section.querySelector<HTMLElement>(
+          "[data-scroll-frame]",
+        );
         if (!frame) return;
 
-        gsap.fromTo(
-          frame,
-          { opacity: 0, y: 60 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.9,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: section,
-              start: "top 80%",
-              end: "top 45%",
-              scrub: true,
-            },
+        // Un-rotate on scroll
+        gsap.to(frame, {
+          rotate: 0,
+          ease: "none",
+          scrollTrigger: {
+            trigger: section,
+            start: "top bottom",
+            end: "top 20%",
+            scrub: true,
           },
-        );
+        });
+
+        // Pin all sections except the last
+        if (idx === sections.length - 1) return;
+
+        ScrollTrigger.create({
+          trigger: section,
+          start: "bottom bottom",
+          end: "bottom top",
+          pin: true,
+          pinSpacing: false,
+        });
       });
     },
     { scope: containerRef, dependencies: [project] },
   );
+
+  const { navigateTo } = useViewTransition();
 
   const handleNextClick = () => {
     navigateTo(`/project/${nextProject.slug}`);
@@ -63,15 +76,18 @@ const ProjectPage = ({ project, nextProject }: ProjectPageProps) => {
 
   return (
     <main ref={containerRef} className="bg-[#EAE6DF] text-[#1C1B1A]">
-      <section className="min-h-[100svh] w-full">
-        <div className="flex min-h-[100svh] w-full flex-col gap-8 px-6 pt-28 pb-12 md:px-10 lg:flex-row lg:items-end lg:gap-12 lg:pt-32 lg:pb-16">
-          <div className="flex w-full items-start lg:w-[10%] lg:pt-2">
+      {/* ── Hero section ─────────────────────────────────────────── */}
+      <section className="h-screen w-full">
+        <div className="sectionContainer flex h-full w-full px-[3rem] pt-[7rem] pb-[4rem]">
+          {/* Number */}
+          <div className="firstSegment h-full w-[10%]">
             <TextReveal>
-              <h3 className="text-2xl font-bebas md:text-[2.25rem]">{project.number}</h3>
+              <h3 className="text-[2rem] font-bebas">{project.number}</h3>
             </TextReveal>
           </div>
 
-          <div className="h-[32rem] w-full overflow-hidden lg:h-[78vh] lg:w-[32%]">
+          {/* Cover image */}
+          <div className="secondSegment h-[85%] w-[30%]">
             <div className="imageDiv h-full w-full overflow-hidden">
               <img
                 ref={imageRef}
@@ -83,44 +99,55 @@ const ProjectPage = ({ project, nextProject }: ProjectPageProps) => {
             </div>
           </div>
 
-          <div className="flex w-full flex-col justify-end gap-5 lg:w-[58%] lg:pl-8">
+          {/* Text content */}
+          <div className="thirdSegment flex h-[85%] w-[60%] flex-col justify-end pl-[8rem]">
             <div className="heading">
               <TextReveal delay="0.8" ease="power4.out" splitBy="chars">
-                <h1 className="max-w-[12ch] text-[clamp(3rem,7vw,6rem)] leading-[0.95]">
-                  {project.title}
-                </h1>
+                <h1 className="text-[5rem] leading-[1.1]">{project.title}</h1>
               </TextReveal>
             </div>
 
-            <div className="subHeading flex flex-wrap gap-x-8 gap-y-3">
+            <div className="subHeading flex gap-[3rem]">
               <TextReveal delay="0.85" splitBy="words">
-                <h2 className="text-[clamp(1.4rem,3vw,2.25rem)] leading-none">{project.subtitle}</h2>
+                <h2 className="text-[2rem]">{project.subtitle}</h2>
               </TextReveal>
               <TextReveal delay="0.85" splitBy="chars">
-                <h2 className="text-[clamp(1.4rem,3vw,2.25rem)] leading-none">{project.year}</h2>
+                <h2 className="text-[2rem]">{project.year}</h2>
               </TextReveal>
             </div>
 
-            <div className="description mt-2 max-w-3xl text-balance">
+            <div className="description mt-[2rem] w-[70%] text-balance">
               <TextReveal delay="0.85" splitBy="lines">
-                <p className="text-[1.05rem] leading-[1.45] md:text-[1.2rem]">
+                <p className="text-[1.5rem] leading-[1.2]">
                   {project.description}
                 </p>
               </TextReveal>
             </div>
+
+            {/* ── Live link button ──────────────────────────────── */}
+            {project.liveUrl && (
+              <div className="mt-[2rem]">
+                 <a href={project.liveUrl}>
+                  <Button text='View live' />
+                 </a>
+                  
+              </div>
+            )}
           </div>
         </div>
       </section>
 
+      {/* ── Gallery sections (pinned + rotation reveal) ─────────── */}
       {project.gallery.map((image, idx) => (
         <section
           key={image}
-          data-gallery-section
-          className="min-h-[100svh] w-full"
+          data-scroll-section
+          className="h-screen w-full"
         >
           <div
-            data-gallery-frame
-            className="h-[100svh] w-full overflow-hidden"
+            data-scroll-frame
+            style={{ transformOrigin: "bottom left" }}
+            className="h-full w-full rotate-[30deg]"
           >
             <img
               className="h-full w-full object-cover"
@@ -131,17 +158,21 @@ const ProjectPage = ({ project, nextProject }: ProjectPageProps) => {
         </section>
       ))}
 
+      {/* ── Footer / Next project ────────────────────────────────── */}
       <footer className="flex min-h-[70svh] w-full flex-col items-center justify-center gap-4 px-6 py-16 text-center">
         <h2 className="font-bebas text-sm uppercase tracking-[0.35em] text-[#827C75]">
           Next Project
         </h2>
-        <button
-          type="button"
-          onClick={handleNextClick}
-          className="font-anton text-[clamp(2.5rem,7vw,5rem)] uppercase leading-none tracking-tight transition-colors hover:text-[#A84B2B]"
-        >
-          {nextProject.title}
-        </button>
+
+        <TextRoll duration=".4" splitBy="chars">
+          <button
+            type="button"
+            onClick={handleNextClick}
+            className="font-anton text-[clamp(2.5rem,7vw,5rem)] uppercase leading-none tracking-tight transition-colors hover:text-[#A84B2B]"
+          >
+            {nextProject.title}
+          </button>
+        </TextRoll>
       </footer>
     </main>
   );

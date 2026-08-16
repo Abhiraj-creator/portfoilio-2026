@@ -13,6 +13,7 @@ export interface Project {
     heroImage: string;
     gallery: string[];
     tags: string[];
+    liveUrl?: string;
 }
 export interface MouseEnterHandler{
     play: () => void;

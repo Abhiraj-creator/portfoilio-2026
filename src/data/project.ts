@@ -19,7 +19,8 @@ export const project = [
       "../../project-1/gallery-3.png",
       "../../project-1/gallery-4.png"
     ],
-    tags: ["3D", "WebGL", "Interactive", "Animation", "React", "Three.js"]
+    tags: ["3D", "WebGL", "Interactive", "Animation", "React", "Three.js"],
+    liveUrl: "https://react-dog-neon.vercel.app/"
   }
   ,
   {
@@ -46,6 +47,7 @@ export const project = [
       "../../project-2/gallery-4.png",
     ],
     tags: ["Desert", "Solitude", "Landscape"],
+     liveUrl: "https://immersive-3d-web-gallery.vercel.app/"
   },
   {
     id: 3,
@@ -71,6 +73,8 @@ export const project = [
       "../../project-3/gallery-4.png",
     ],
     tags: ["City", "Editorial", "Night"],
+    liveUrl: "https://shirt-showcase-3d.onrender.com/"
+    
   },
   {
     id: 4,
@@ -94,6 +98,7 @@ export const project = [
       "../..//project-4/gallery-4.png",
     ],
     tags: ["Healthcare", "Medical", "Wellness", "24/7 Support", "Modern Facilities"],
+     liveUrl: "https://healing-wings-abhiraj.netlify.app/"
   },
   {
     id: 5,
@@ -119,6 +124,7 @@ export const project = [
       "../..//project-5/gallery-4.png",
     ],
     tags: ["Dogs", "Adoption", "campaign", "Awareness", "Photography"],
+      liveUrl: "https://don-t-board-me.vercel.app/"
   },
   {
     id: 6,
@@ -144,6 +150,7 @@ export const project = [
       "../..//project-6/gallery-4.png",
     ],
     tags: ["tala", "Natural", "Healthy", "Snacks", "Photography"],
+    liveUrl:"https://tala-abhiraj.netlify.app/"
   },
   {
     id: 7,
@@ -169,5 +176,7 @@ export const project = [
       "../../project-7/gallery-4.png",
     ],
     tags: ["React", "Node.js", "TypeScript", "LangChain", "MongoDB", "Real-time Streaming", "AI Comparison"],
+    liveUrl:"https://ai-battle-arena-wyu9.onrender.com/"
   }
+
 ];

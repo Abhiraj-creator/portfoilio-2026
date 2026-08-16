@@ -160,7 +160,7 @@ const Heropage = () => {
                                     color: "#B7B3AE",
                                     transform: "scaleX(1.05)"
                                 }}
-                            >
+                            >   
                                 web
                             </span>
                         </div>
