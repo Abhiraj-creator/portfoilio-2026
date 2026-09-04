@@ -127,10 +127,10 @@ const ProjectPage = ({ project, nextProject }: ProjectPageProps) => {
             {/* ── Live link button ──────────────────────────────── */}
             {project.liveUrl && (
               <div className="mt-[2rem]">
-                 <a href={project.liveUrl}>
+                <a href={project.liveUrl}>
                   <Button text='View live' />
-                 </a>
-                  
+                </a>
+
               </div>
             )}
           </div>
